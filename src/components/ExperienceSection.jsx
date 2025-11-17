@@ -1,4 +1,5 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 
 const ExperienceSection = () => {
   const serviceHighlights = [
@@ -14,7 +15,13 @@ const ExperienceSection = () => {
       <div className="container mx-auto px-6">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
           {/* Testimonial */}
-          <div className="border border-gray-200 p-8">
+          <motion.div
+            className="border border-gray-200 p-8"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.6, ease: 'easeOut' }}
+          >
             <p className="text-xs uppercase tracking-widest text-gray-500 mb-6">
               Testimonial
             </p>
@@ -35,10 +42,16 @@ const ExperienceSection = () => {
                 with comfort, care, and confidence.”
               </p>
             </div>
-          </div>
+          </motion.div>
 
           {/* Offer card */}
-          <div className="relative border border-gray-200">
+          <motion.div
+            className="relative border border-gray-200 overflow-hidden"
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.7, ease: 'easeOut' }}
+          >
             <div
               className="absolute inset-0"
               style={{
@@ -48,7 +61,13 @@ const ExperienceSection = () => {
                 backgroundPosition: 'center',
               }}
             ></div>
-            <div className="relative bg-white/80 backdrop-blur-sm m-10 p-10 text-center">
+            <motion.div
+              className="relative bg-white/80 backdrop-blur-sm m-10 p-10 text-center"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, ease: 'easeOut', delay: 0.1 }}
+            >
               <p className="text-xs uppercase tracking-widest text-gray-600 mb-3">
                 20% Discount
               </p>
@@ -58,25 +77,42 @@ const ExperienceSection = () => {
               <p className="text-sm text-gray-600 mb-6">
                 Book any facial @ ₹499
               </p>
-              <button className="text-sm tracking-wide underline hover:no-underline">
+              <motion.button
+                className="text-sm tracking-wide underline hover:no-underline"
+                whileHover={{ letterSpacing: '0.3em' }}
+                transition={{ duration: 0.3 }}
+              >
                 Book Now
-              </button>
-            </div>
-          </div>
+              </motion.button>
+            </motion.div>
+          </motion.div>
 
           {/* Service highlights */}
-          <div className="border border-gray-200 p-8">
+          <motion.div
+            className="border border-gray-200 p-8"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.6, ease: 'easeOut', delay: 0.1 }}
+          >
             <p className="text-xs uppercase tracking-widest text-gray-500 mb-6">
               Our Services
             </p>
             <ul className="space-y-4 text-sm text-gray-700">
-              {serviceHighlights.map((item) => (
-                <li key={item} className="leading-relaxed">
+              {serviceHighlights.map((item, index) => (
+                <motion.li
+                  key={item}
+                  className="leading-relaxed"
+                  initial={{ opacity: 0, x: 20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.4, delay: index * 0.05 }}
+                >
                   {item}
-                </li>
+                </motion.li>
               ))}
             </ul>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>
@@ -84,4 +120,5 @@ const ExperienceSection = () => {
 };
 
 export default ExperienceSection;
+
 

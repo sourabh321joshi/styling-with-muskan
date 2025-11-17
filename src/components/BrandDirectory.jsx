@@ -1,4 +1,5 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 
 const BrandDirectory = () => {
   const directories = [
@@ -74,9 +75,27 @@ const BrandDirectory = () => {
   return (
     <section className="bg-gray-50 border-t border-gray-200 py-20">
       <div className="container mx-auto px-6">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+        <motion.div
+          className="grid grid-cols-1 md:grid-cols-3 gap-12"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+          variants={{
+            hidden: { opacity: 0 },
+            visible: {
+              opacity: 1,
+              transition: { staggerChildren: 0.07 },
+            },
+          }}
+        >
           {directories.map((directory) => (
-            <div key={directory.title}>
+            <motion.div
+              key={directory.title}
+              variants={{
+                hidden: { opacity: 0, y: 30 },
+                visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: 'easeOut' } },
+              }}
+            >
               <h3 className="text-xs uppercase tracking-widest text-gray-500 mb-4">
                 {directory.title}
               </h3>
@@ -85,9 +104,9 @@ const BrandDirectory = () => {
                   <p key={item}>{item}</p>
                 ))}
               </div>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

@@ -1,4 +1,5 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Pagination, Navigation } from 'swiper/modules';
 import 'swiper/css';
@@ -6,6 +7,12 @@ import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 
 const HeroBanner = ({ slides }) => {
+  const contentVariants = {
+    initial: { opacity: 0, y: 40 },
+    animate: { opacity: 1, y: 0, transition: { duration: 0.8, ease: 'easeOut' } },
+    exit: { opacity: 0, y: -40, transition: { duration: 0.4 } },
+  };
+
   return (
     <section className="relative w-full overflow-hidden bg-white">
       <Swiper
@@ -33,8 +40,15 @@ const HeroBanner = ({ slides }) => {
               </div>
 
               {/* Minimal Text Overlay - Bottom Center */}
-              <div className="absolute bottom-0 left-0 right-0 bg-white/95 py-12">
-                <div className="container mx-auto px-6 text-center">
+              <motion.div
+                className="absolute bottom-0 left-0 right-0 bg-white/95 py-12"
+                variants={contentVariants}
+                initial="initial"
+                animate="animate"
+                exit="exit"
+                key={slide.subtitle}
+              >
+                <motion.div className="container mx-auto px-6 text-center" variants={contentVariants}>
                   <p className="text-xs uppercase tracking-widest text-gray-600 mb-2">
                     {slide.title}
                   </p>
@@ -44,11 +58,16 @@ const HeroBanner = ({ slides }) => {
                   <p className="text-sm text-gray-600 mb-6">
                     {slide.price}
                   </p>
-                  <a href="#categories" className="text-black text-sm underline hover:no-underline transition-all">
+                  <motion.a
+                    href="#categories"
+                    className="text-black text-sm underline hover:no-underline transition-all inline-flex items-center justify-center"
+                    whileHover={{ letterSpacing: '0.2em' }}
+                    transition={{ duration: 0.3 }}
+                  >
                     {slide.cta}
-                  </a>
-                </div>
-              </div>
+                  </motion.a>
+                </motion.div>
+              </motion.div>
             </div>
           </SwiperSlide>
         ))}
